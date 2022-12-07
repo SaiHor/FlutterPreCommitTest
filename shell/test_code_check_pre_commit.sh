@@ -6,10 +6,8 @@ for FILE in $(git diff --name-only --cached); do
         continue
     fi
 
-    # 匹配不能上传的关键字
-    # shellcheck disable=SC2069
-    # shellcheck disable=SC2196
-    egrep '\/\/\/\(\.\*\)testCode' $FILE 2>&1 >/dev/null
+
+    grep 'testCode\|debugger\|TestCode\|testcode\|alert(' $FILE 2>&1 >/dev/null
     if [ $? -eq 0 ]; then
         # 将错误输出
         echo -e $FILE '文件中包含了TODO、debugger、alert其中一个关键字请删除后再提交'
