@@ -5,5 +5,5 @@ repos:
     hooks:
     -   id: test_code_check_pre_commit
         name: test_code_check_pre_commit
-        entry: test_code_check_pre_commit.sh
+        entry: shell/test_code_check_pre_commit.sh
         language: script
