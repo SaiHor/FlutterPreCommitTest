@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "pre-main hook 运行了"
-for FILE in $(git diff --name-only --cached); do
+for FILE in $(git diff --name-only); do
     # 忽略检查的文件
     if [[ $FILE == *".sh"* ]] ; then
         continue
