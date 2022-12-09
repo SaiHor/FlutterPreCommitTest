@@ -1,9 +1,13 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
--   repo: local
+  - repo: local
     hooks:
-    -   id: test_code_check_pre_commit
+      - id: test_code_check_pre_commit
         name: test_code_check_pre_commit
         entry: shell/test_code_check_pre_commit.sh
+        language: script
+      - id: dartfmt
+        name: dartfmt
+        entry: shell/dartfmt.sh
         language: script
