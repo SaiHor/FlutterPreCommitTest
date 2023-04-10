@@ -1,7 +1,7 @@
 #!/bin/bash
 
 name=""
-for FILE in $(git diff --name-only); do
+for FILE in $(git diff --name-only --cached); do
     # 忽略检查的文件
     if [[ $FILE == *".sh"* ]] ; then
         continue
@@ -10,9 +10,10 @@ for FILE in $(git diff --name-only); do
     fi
 
     name="$name $FILE"
+    echo "$FILE:$FILE"
 done
 
-echo "-> Running 'flutter format' to check project dart style 🤓"
+echo "name:$name"
 
 RESULT=$(dartfmt -n "$name")
 
