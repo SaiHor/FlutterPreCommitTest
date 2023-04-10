@@ -12,14 +12,16 @@ for FILE in $(git diff --name-only --cached); do
     name="$name $FILE"
 done
 
-DARTFMT_OUTPUT=$(dartfmt -w "$name" . | grep Formatted)
+echo "-> Running 'flutter format' to check project dart style 🤓"
 
-if [ -n "$DARTFMT_OUTPUT" ]; then
-  echo "$DARTFMT_OUTPUT"
-  echo "Re-attempt commit."
-  exit 1
+RESULT=$(dartfmt -w "$name")
+
+if [[ $? != 0 ]]; then
+    echo "----> Command failed."
+elif [[ $RESULT ]]; then
+    echo "----> Some files are looking weird here 🤓:"
+    echo "$RESULT"
+    exit 1
 else
-  echo "All Dart files formatted correctly. Yay!"
-  exit 0
-
+    echo "----> All format is good ✅"
 fi
