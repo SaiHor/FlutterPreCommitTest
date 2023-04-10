@@ -9,7 +9,7 @@ for FILE in $(git diff --name-only --cached); do
         continue
     fi
 
-    name="$name $FILE"
+    name="$FILE"
     echo "FILE:$FILE"
 done
 
