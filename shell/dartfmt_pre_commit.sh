@@ -14,7 +14,7 @@ done
 
 echo "-> Running 'flutter format' to check project dart style 🤓"
 
-RESULT=$(dartfmt -w "$name")
+RESULT=$(dartfmt -n "$name")
 
 if [[ $? != 0 ]]; then
     echo "----> Command failed."
