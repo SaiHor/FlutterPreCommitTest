@@ -11,3 +11,4 @@ repos:
         name: dartfmt
         entry: shell/dartfmt_pre_commit.sh
         language: script
+        alias: dartfmt='path/to/dartfmt'
