@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "test_code_check_pre_commit.sh 运行了"
+echo "dartfmt_pre_commit.sh 运行了"
 name=""
 for FILE in $(git diff --name-only --cached); do
     # 忽略检查的文件

@@ -5,7 +5,7 @@ repos:
     hooks:
       - id: test_code_check_pre_commit
         name: test_code_check_pre_commit
-        entry: shell/test_code_check_pre_commit.sh
+        entry: shell/dartfmt_pre_commit.sh
         language: script
       - id: dartfmt
         name: dartfmt
