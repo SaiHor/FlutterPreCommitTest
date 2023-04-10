@@ -13,7 +13,7 @@ for FILE in $(git diff --name-only --cached); do
     echo "$FILE:$FILE"
 done
 
-nameR=$(name | grep -o "[^ ]\+\( \+[^ ]\+\)*")
+nameR=$("$name" | grep -o "[^ ]\+\( \+[^ ]\+\)*")
 echo "name:$nameR"
 
 RESULT=$(dartfmt -n "$nameR")
