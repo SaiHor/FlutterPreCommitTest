@@ -1,6 +1,8 @@
 #!/bin/bash
 
 name=""
+flag=0
+#cd ..
 for FILE in $(git diff --name-only --cached); do
     # 忽略检查的文件
     if [[ $FILE == *".sh"* ]] ; then
@@ -9,20 +11,22 @@ for FILE in $(git diff --name-only --cached); do
         continue
     fi
 
-    name="$FILE"
-    echo "FILE:$FILE"
+    name="$name $FILE"
+
+    RESULT=$(dartfmt -n "$FILE")
+    if [[ $? != 0 ]]; then
+        flag=2
+    elif [[ $RESULT ]]; then
+      echo "this file is not format:$FILE"
+        flag=1
+    fi
 done
 
-name="${name%*}"
-echo "name:$name"
 
-RESULT=$(dartfmt -n "$name")
 
-if [[ $? != 0 ]]; then
+if [[ $flag == 2 ]]; then
     echo "----> Command failed."
-elif [[ $RESULT ]]; then
-    echo "----> Some files are looking weird here 🤓:"
-    echo "$RESULT"
+elif [[ $flag == 1 ]]; then
     exit 1
 else
     echo "----> All format is good ✅"
