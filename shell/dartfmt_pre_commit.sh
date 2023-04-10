@@ -1,11 +1,16 @@
-DARTFMT_OUTPUT=`dartfmt -w . | grep Formatted`
+#!/bin/bash
+echo "test_code_check_pre_commit.sh 运行了"
+name=""
+for FILE in $(git diff --name-only --cached); do
+    # 忽略检查的文件
+    if [[ $FILE == *".sh"* ]] ; then
+        continue
+    elif [[ $FILE == *".md"* ]] ; then
+        continue
+    fi
 
-if [ -n "$DARTFMT_OUTPUT" ]; then
-  echo $DARTFMT_OUTPUT
-  echo "Re-attempt commit."
-  exit 1
-else
-  echo "All Dart files formatted correctly. Yay!"
-  exit 0
-
-fi
+    name="$name $FILE"
+done
+cd ..
+exec dartfmt -w "name"
+exit
