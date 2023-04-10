@@ -9,5 +9,5 @@ repos:
         language: script
       - id: dartfmt
         name: dartfmt
-        entry: shell/dartfmt.sh
+        entry: shell/dartfmt_pre_commit.sh
         language: script
