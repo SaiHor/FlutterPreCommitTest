@@ -12,7 +12,7 @@ for FILE in $(git diff --name-only --cached); do
     name="$name $FILE"
 done
 
-DARTFMT_OUTPUT=$(dartfmt -w name. | grep Formatted)
+DARTFMT_OUTPUT=$(dartfmt -w "$name". | grep Formatted)
 
 if [ -n "$DARTFMT_OUTPUT" ]; then
   echo "$DARTFMT_OUTPUT"
