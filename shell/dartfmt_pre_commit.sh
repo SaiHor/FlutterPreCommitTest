@@ -13,9 +13,10 @@ for FILE in $(git diff --name-only --cached); do
     echo "$FILE:$FILE"
 done
 
-echo "name:$name"
+nameR=$(name | grep -o "[^ ]\+\( \+[^ ]\+\)*")
+echo "name:$nameR"
 
-RESULT=$(dartfmt -n "$name")
+RESULT=$(dartfmt -n "$nameR")
 
 if [[ $? != 0 ]]; then
     echo "----> Command failed."
