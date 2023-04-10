@@ -1,8 +1,5 @@
 #!/bin/bash
-
-name=""
 flag=0
-#cd ..
 for FILE in $(git diff --name-only --cached); do
     # 忽略检查的文件
     if [[ $FILE == *".sh"* ]] ; then
@@ -10,8 +7,6 @@ for FILE in $(git diff --name-only --cached); do
     elif [[ $FILE == *".md"* ]] ; then
         continue
     fi
-
-    name="$name $FILE"
 
     RESULT=$(dartfmt -n "$FILE")
     if [[ $? != 0 ]]; then
@@ -22,12 +17,10 @@ for FILE in $(git diff --name-only --cached); do
     fi
 done
 
-
-
 if [[ $flag == 2 ]]; then
     echo "----> Command failed."
 elif [[ $flag == 1 ]]; then
     exit 1
 else
-    echo "----> All format is good ✅"
+    echo "----> All format is good "
 fi
