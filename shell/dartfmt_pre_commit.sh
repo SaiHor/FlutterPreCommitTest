@@ -14,7 +14,6 @@ done
 
 echo "-> Running 'flutter format' to check project dart style 🤓"
 
-cd ..
 RESULT=$(dartfmt -n "$name")
 
 if [[ $? != 0 ]]; then
