@@ -1,7 +1,8 @@
 #!/bin/bash
 
 name=""
-for FILE in $(git diff --name-only --cached); do
+flag=0
+for FILE in $(git diff --name-only); do
     # 忽略检查的文件
     if [[ $FILE == *".sh"* ]] ; then
         continue
@@ -9,18 +10,20 @@ for FILE in $(git diff --name-only --cached); do
         continue
     fi
 
-    name="$name $FILE"
+    dartfmt -n "$FILE"
+    if [[ $? != 0 ]]; then
+      flag=1
+        echo "$FILE should format"
+    fi
 done
 
 echo "-> Running 'flutter format' to check project dart style 🤓"
 
-RESULT=$(dartfmt -n "$name")
 
-if [[ $? != 0 ]]; then
-    echo "----> Command failed."
-elif [[ $RESULT ]]; then
-    echo "----> Some files are looking weird here 🤓:"
-    echo "$RESULT"
+if [[ $flag == 0 ]]; then
+    exit 0
+elif [[ $flag == 1 ]]; then
+    echo "$flag"
     exit 1
 else
     echo "----> All format is good ✅"
