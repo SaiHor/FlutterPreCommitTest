@@ -12,5 +12,5 @@ for FILE in $(git diff --name-only --cached); do
     name="$name $FILE"
 done
 cd ..
-exec dartfmt -w "name"
+exec dartfmt -w "$name"
 exit
